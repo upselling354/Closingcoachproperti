@@ -383,30 +383,29 @@
 <div id="toast">Notifikasi sistem</div>
 
 <script>
-    const apiKey = "server"; // Diset oleh environment
-    let activeTab = 0;
-// Ambil API Key yang pernah disimpan
-document.addEventListener("DOMContentLoaded", function() {
+    const apiKey = "server";
+let activeTab = 0;
 
-    const savedKey =
-        localStorage.getItem("geminiKey");
+// Saat halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", function () {
 
-    if(savedKey) {
-        document.getElementById("geminiKey").value =
-        savedKey;
+    // Ambil API Key yang pernah disimpan
+    const savedKey = localStorage.getItem("geminiKey");
+
+    if (savedKey) {
+        document.getElementById("geminiKey").value = savedKey;
     }
-document.addEventListener("DOMContentLoaded", function() {
 
-    const keyInput =
-        document.getElementById("geminiKey");
+    // Simpan otomatis saat user mengganti API Key
+    const keyInput = document.getElementById("geminiKey");
 
-    keyInput.addEventListener("change", function() {
+    if (keyInput) {
+        keyInput.addEventListener("change", function () {
+            localStorage.setItem("geminiKey", this.value);
+        });
+    }
 
-        localStorage.setItem(
-            "geminiKey",
-            this.value
-        );
-    });
+});
 
     // Markdown configuration
     marked.setOptions({
